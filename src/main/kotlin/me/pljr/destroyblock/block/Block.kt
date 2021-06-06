@@ -21,7 +21,7 @@ class Block(
     val maxHealth: Int,
     val respawn: Long) {
     var health: Int = maxHealth
-    var hologram = HologramsAPI.createHologram(DestroyBlock.instance, location.clone().add(0.5, 2.5, 0.5))
+    var hologram = HologramsAPI.createHologram(DestroyBlock.instance, location.world.getBlockAt(location).location.add(0.5, 2.5, 0.5))
 
     init {
         updateHologram()
