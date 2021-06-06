@@ -1,0 +1,42 @@
+# Created with ❤ by https://github.com/ThePlay3r
+
+# List of usable block, DO NOT change this value.
+blocks:
+  # ID of the block, can be whatever as long as it doesn't break the YAML Syntax.
+  1:
+    # Name of the block, that will be shown as a hologram.
+    name: "Block"
+    # Permission needed to be able to count as a destroyer of the block.
+    perm: ""
+    # Number of times the block needs to be destroyed to, well, be destroyed.
+    health: 15
+    # Location of the block
+    location:
+      x: 25.0
+      y: 25.0
+      z: 25.0
+      yaw: 0.0
+      pitch: 0.0
+      world: "world"
+    # Title that will be sent to player that destroyed the block.
+    # ({player} - Player name)
+    title:
+      title: "CG, {player}!"
+      subtitle: "You destroyed the block!"
+      in: 0
+      stay: 40
+      out: 20
+    # Console commands that will be sent every time a player breaks the block.
+    # ({player} - Player name)
+    rewards:
+      - "eco give {player} 100"
+    # After player destroys the block, only one of the following Console Commands will be executed.
+    # ({player} - Player name)
+    randomRewards:
+      - "say {player} got a random message number #1!"
+      - "say {player} got a random message number #2!"
+      - "say {player} got a random message number #3!"
+      - "say {player} got a random message number #4!"
+    # Time in ticks, that it shall take to respawn after being destroyed.
+    # 20 Ticks = 1 Second
+    respawn: 40

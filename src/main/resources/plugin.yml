@@ -1,0 +1,7 @@
+name: DestroyBlock
+version: 1.0.0
+main: me.pljr.destroyblock.DestroyBlock
+api-version: 1.13
+authors: [9hx]
+depend: [HolographicDisplays]
+description: Literally just destroy the block.
