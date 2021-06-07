@@ -1,5 +1,6 @@
 package me.pljr.destroyblock.config
 
+import com.cryptomorin.xseries.XMaterial
 import me.pljr.destroyblock.title.PLJRTitle
 import me.pljr.destroyblock.title.TitleBuilder
 import me.pljr.destroyblock.util.colorString
@@ -320,5 +321,25 @@ class ConfigManager(private val plugin: JavaPlugin, private val fileName: String
         val yaw = getFloat("$path.yaw")
         val pitch = getFloat("$path.pitch")
         return Location(world, x, y, z, yaw, pitch)
+    }
+
+    /**
+     * Tries to gen an [Material] from [FileConfiguration].
+     *
+     * @param path Path to the [Material]
+     * @return Custom [Material] if one was found, STONE otherwise.
+     */
+    fun getMaterial(path: String): Material {
+        if (config.isSet(path)) {
+            val materialName = getString(path)
+            val xMaterialOptional = XMaterial.matchXMaterial(materialName)
+            if (xMaterialOptional.isPresent && xMaterialOptional.get().parseMaterial() != null) {
+                return xMaterialOptional.get().parseItem()!!.type
+            }
+            isNot("Material", materialName, path)
+            return Material.STONE
+        }
+        pathNotFound(path)
+        return Material.STONE
     }
 }

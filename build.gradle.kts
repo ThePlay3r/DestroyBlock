@@ -32,6 +32,8 @@ dependencies {
     // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
+    implementation("com.github.cryptomorin:XSeries:7.9.1.1")
+
     // Kyori
     implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
     implementation("net.kyori:adventure-platform-bukkit:4.0.0-SNAPSHOT")
@@ -42,6 +44,7 @@ dependencies {
 
 tasks.named<ShadowJar>("shadowJar") {
     relocate("net.kyori", "me.pljr.destroyblock.kyori")
+    relocate("com.cryptomorin.xseries", "me.pljr.pljrapispigot.xseries")
 }
 
 tasks.build {

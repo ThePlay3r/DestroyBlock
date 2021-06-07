@@ -10,15 +10,22 @@ class BlockManager(config: ConfigManager) {
     init {
         val section = config.getConfigurationSection(CONF_PATH)
         section?.getKeys(false)?.forEach { block ->
+            val pth = "$CONF_PATH.$block"
             blocks[block] = Block(
-                config.getString("$CONF_PATH.$block.name"),
-                config.getString("$CONF_PATH.$block.perm"),
-                config.getLocation("$CONF_PATH.$block.location"),
-                config.getPLJRTitle("$CONF_PATH.$block.title"),
-                config.getStringList("$CONF_PATH.$block.rewards"),
-                config.getStringList("$CONF_PATH.$block.randomRewards"),
-                config.getInt("$CONF_PATH.$block.health"),
-                config.getLong("$CONF_PATH.$block.respawn")
+                config.getMaterial("$pth.type"),
+                config.getString("$pth.name"),
+                config.getString("$pth.perm"),
+                config.getLocation("$pth.location"),
+                config.getPLJRTitle("$pth.title"),
+                config.getStringList("$pth.rewards"),
+                config.getStringList("$pth.randomRewards"),
+                config.getInt("$pth.health"),
+                config.getString("$pth.healthBar.health"),
+                config.getString("$pth.healthBar.progressBarSymbol"),
+                config.getString("$pth.healthBar.progressBarLocked"),
+                config.getString("$pth.healthBar.progressBarUnlocked"),
+                config.getString("$pth.info"),
+                config.getLong("$pth.respawn")
             )
         }
     }

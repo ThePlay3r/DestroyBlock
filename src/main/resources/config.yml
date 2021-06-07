@@ -4,12 +4,25 @@
 blocks:
   # ID of the block, can be whatever as long as it doesn't break the YAML Syntax.
   1:
+    # Material that will be shown above the block.
+    type: DIAMOND_PICKAXE
     # Name of the block, that will be shown as a hologram.
     name: "Block"
     # Permission needed to be able to count as a destroyer of the block.
     perm: ""
     # Number of times the block needs to be destroyed to, well, be destroyed.
     health: 15
+    # Shown representation of current health of the block.
+    healthBar:
+      # ({health} - Current health of the block)
+      # ({maxHealth} - The maximum health of the block)
+      health: "{health}/{maxHealth}"
+      # Progress Bar Configuration
+      progressBarSymbol: "■"
+      progressBarLocked: "&8"
+      progressBarUnlocked: "&b"
+    # Information about block, that will be shown underneath progress bar.
+    info: "Mine to get reward."
     # Location of the block
     location:
       x: 25.0

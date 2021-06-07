@@ -12,6 +12,7 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 class Block(
+    val type: Material,
     val name: String,
     val perm: String,
     val location: Location,
@@ -19,9 +20,14 @@ class Block(
     val rewards: List<String>,
     val randomRewards: List<String>,
     val maxHealth: Int,
+    val healthRepresentation: String,
+    val progressBarSymbol: String,
+    val progressBarLocked: String,
+    val progressBarUnlocked: String,
+    val info: String,
     val respawn: Long) {
     var health: Int = maxHealth
-    var hologram = HologramsAPI.createHologram(DestroyBlock.instance, location.world.getBlockAt(location).location.add(0.5, 2.5, 0.5))
+    var hologram = HologramsAPI.createHologram(DestroyBlock.instance, location.world.getBlockAt(location).location.add(0.5, 3.0, 0.5))
 
     init {
         updateHologram()
@@ -35,10 +41,14 @@ class Block(
 
     private fun updateHologram() {
         hologram.clearLines()
-        hologram.appendItemLine(ItemStack(Material.DIAMOND_PICKAXE))
+        hologram.appendItemLine(ItemStack(type))
         hologram.appendTextLine(name)
+        hologram.appendTextLine(healthRepresentation
+            .replace("{health}", "$health")
+            .replace("{maxHealth}", "$maxHealth"))
         hologram.appendTextLine(createProgressBar(health.toFloat(), maxHealth.toFloat(),
-            "■", "&8", "&b"))
+            progressBarSymbol, progressBarLocked, progressBarUnlocked))
+        hologram.appendTextLine(info)
     }
 
     private fun destroy(player: Player) {
@@ -67,6 +77,7 @@ class Block(
 
         Bukkit.getScheduler().runTaskLater(DestroyBlock.instance, Runnable {
             block.type = blockType
+            updateHologram()
         }, respawn)
     }
 }
