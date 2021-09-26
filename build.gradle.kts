@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "me.pljr"
-version = "1.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -38,7 +38,7 @@ dependencies {
     implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
     implementation("net.kyori:adventure-platform-bukkit:4.0.0-SNAPSHOT")
 
-    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
     compileOnly("com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.0")
 }
 
@@ -56,5 +56,5 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "16"
 }
