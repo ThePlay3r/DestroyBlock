@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "me.pljr"
-version = "1.0.1"
+version = "1.2.0"
 
 repositories {
     mavenCentral()
@@ -36,10 +36,10 @@ dependencies {
 
     // Kyori
     implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
-    implementation("net.kyori:adventure-platform-bukkit:4.0.0-SNAPSHOT")
+    implementation("net.kyori:adventure-platform-bukkit:4.0.1")
 
-    compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
-    compileOnly("com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.0")
+    compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
+    compileOnly(files("libs/CMIAPI8.7.8.2.jar"))
 }
 
 tasks.named<ShadowJar>("shadowJar") {
@@ -57,4 +57,8 @@ tasks.test {
 
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "16"
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }

@@ -1,6 +1,7 @@
 package me.pljr.destroyblock.block
 
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI
+import com.Zrips.CMI.CMI
+import com.Zrips.CMI.Modules.Holograms.CMIHologram
 import me.pljr.destroyblock.DestroyBlock
 import me.pljr.destroyblock.title.PLJRTitle
 import me.pljr.destroyblock.title.TitleBuilder
@@ -27,9 +28,10 @@ class Block(
     val info: String,
     val respawn: Long) {
     var health: Int = maxHealth
-    var hologram = HologramsAPI.createHologram(DestroyBlock.instance, location.world.getBlockAt(location).location.add(0.5, 3.0, 0.5))
+    var hologram = CMIHologram(name, location.world.getBlockAt(location).location.add(0.5, 3.0, 0.5))
 
     init {
+        CMI.getInstance().hologramManager.addHologram(hologram)
         updateHologram()
     }
 
@@ -40,15 +42,17 @@ class Block(
     }
 
     private fun updateHologram() {
-        hologram.clearLines()
-        hologram.appendItemLine(ItemStack(type))
-        hologram.appendTextLine(name)
-        hologram.appendTextLine(healthRepresentation
-            .replace("{health}", "$health")
-            .replace("{maxHealth}", "$maxHealth"))
-        hologram.appendTextLine(createProgressBar(health.toFloat(), maxHealth.toFloat(),
-            progressBarSymbol, progressBarLocked, progressBarUnlocked))
-        hologram.appendTextLine(info)
+        hologram.lines = listOf(
+            "ICON:$type",
+            name,
+            healthRepresentation
+                .replace("{health}", "$health")
+                .replace("{maxHealth}", "$maxHealth"),
+            createProgressBar(health.toFloat(), maxHealth.toFloat(),
+                progressBarSymbol, progressBarLocked, progressBarUnlocked),
+            "",
+            info)
+        hologram.update()
     }
 
     private fun destroy(player: Player) {
